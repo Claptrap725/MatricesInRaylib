@@ -9,31 +9,30 @@ namespace MaticesInRaylib
         {
             // Initialization
             //--------------------------------------------------------------------------------------
-            int screenWidth = 800;
-            int screenHeight = 450;
+            int screenWidth = 1280;
+            int screenHeight = 720;
 
-            rl.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+            rl.InitWindow(screenWidth, screenHeight, "I'm sure glad Unity does all this for me!");
 
             rl.SetTargetFPS(60);
             //--------------------------------------------------------------------------------------
+
+            Game gameSession = new Game();
+            gameSession.Init();
 
             // Main game loop
             while (!rl.WindowShouldClose())    // Detect window close button or ESC key
             {
                 // Update
                 //----------------------------------------------------------------------------------
+                gameSession.Update();
                 // TODO: Update your variables here
                 //----------------------------------------------------------------------------------
 
                 // Draw
                 //----------------------------------------------------------------------------------
-                rl.BeginDrawing();
-
-                rl.ClearBackground(Color.RAYWHITE);
-
-                rl.DrawText("Congrats! You created your first window!", 190, 200, 20, Color.LIGHTGRAY);
-
-                rl.EndDrawing();
+                
+                gameSession.Draw();
                 //----------------------------------------------------------------------------------
             }
 
