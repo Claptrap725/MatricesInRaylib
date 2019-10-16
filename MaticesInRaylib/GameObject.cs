@@ -13,6 +13,13 @@ namespace MaticesInRaylib
         protected Matrix3 localTransform = new Matrix3();
         protected Matrix3 globalTransform = new Matrix3();
 
+        public AABB collider;
+
+        public Vector3 Position
+        {
+            get  { return new Vector3(globalTransform.m7, globalTransform.m8, 1);  }
+        }
+
         public Matrix3 LocalTransform
         {
             get { return localTransform; }
@@ -31,6 +38,11 @@ namespace MaticesInRaylib
         public GameObject()
         {
 
+        }
+
+        public GameObject(float x, float y)
+        {
+            SetPosition(x, y);
         }
 
         ~GameObject()
@@ -70,6 +82,7 @@ namespace MaticesInRaylib
         {
             if (children.Remove(child) == true)
             {
+                child.SetLocalTransformToGlobal();
                 child.parent = null;
             }
         }
@@ -108,6 +121,11 @@ namespace MaticesInRaylib
             
         }
 
+        public void SetLocalTransformToGlobal()
+        {
+            localTransform.Set(globalTransform);
+        }
+
         public void UpdateTransform()
         {
             if (parent != null)
@@ -122,6 +140,12 @@ namespace MaticesInRaylib
         public void SetPosition(float x, float y)
         {
             localTransform.SetTranslation(x, y);
+            UpdateTransform();
+        }
+
+        public void SetPosition(Vector3 v)
+        {
+            localTransform.SetTranslation(v.x, v.y);
             UpdateTransform();
         }
 

@@ -11,6 +11,27 @@ namespace MaticesInRaylib
         public float x, y, z;
 
         /// <summary>
+        /// Returns the smaller of the two Vectors
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Vector3 Min(Vector3 a, Vector3 b)
+        {
+            return new Vector3(Math.Min(a.x, b.x), Math.Min(a.y, b.y), Math.Min(a.z, b.z));
+        }
+        /// <summary>
+        /// Returns the larger of the two Vectors
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Vector3 Max(Vector3 a, Vector3 b)
+        {
+            return new Vector3(Math.Max(a.x, b.x), Math.Max(a.y, b.y), Math.Max(a.z, b.z));
+        }
+
+        /// <summary>
         /// Creates a new Vector3 and sets all axies to 0
         /// </summary>
         public Vector3()
@@ -78,6 +99,17 @@ namespace MaticesInRaylib
             return Math.Round(v1.x, 4) != Math.Round(v2.x, 4) && Math.Round(v1.y, 4) != Math.Round(v2.y, 4) && Math.Round(v1.z, 4) != Math.Round(v2.z, 4);
         }
 
+        /// <summary>
+        /// Returns a clamped Vector t to fit iniside the bounds of max and min
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="max"></param>
+        /// <param name="min"></param>
+        /// <returns></returns>
+        public static Vector3 Clamp(Vector3 t, Vector3 max, Vector3 min)
+        {
+            return Max(max, Min(min, t));
+        }
 
         /// <summary>
         /// Returns the Magnitude of the Vector

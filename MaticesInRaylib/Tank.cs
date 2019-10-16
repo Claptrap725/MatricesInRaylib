@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
 using rl = Raylib.Raylib;
 
 namespace MaticesInRaylib
@@ -40,27 +37,43 @@ namespace MaticesInRaylib
             {
                 turret.Rotate(rotationSpeed);
             }
-            if (rl.IsKeyDown(Raylib.KeyboardKey.KEY_SPACE))
+            if (rl.IsKeyPressed(Raylib.KeyboardKey.KEY_SPACE))
             {
-
+                Shoot();
             }
+
+
+            collider.Fit(cornersGlobalPosition);
+            turret.collider.Fit(turret.cornersGlobalPosition);
         }
 
         public Tank()
         {
             Game.gameObjects.Add(this);
-            Load("tankBlue_outline.png");
+            Load("tankBlue.png");
             // tank is facing the wrong way... fix that here 
             SetRotate(-90 * (float)(Math.PI / 180.0f));
             SetPosition(rl.GetScreenWidth() / 2.0f, rl.GetScreenHeight() / 2.0f);
             image.SetRotate(-90 * (float)(Math.PI / 180));
             image.SetPosition(-Width / 2, Height / 2);
 
-            turret.Load("barrelBlue_outline.png");
+            turret.Load("barrelBlue.png");
             turret.image.SetRotate(-90 * (float)(Math.PI / 180));
             turret.image.SetPosition(0, 11);
             AddChild(turret);
             UpdateTransform();
+
+            
+            collider = new AABB();
+            turret.collider = new AABB();
+        }
+
+        private void Shoot()
+        {
+            BlueBullet bullet = new BlueBullet();
+            turret.AddChild(bullet);
+            UpdateTransform();
+            turret.RemoveChild(bullet);
         }
     }
 }
