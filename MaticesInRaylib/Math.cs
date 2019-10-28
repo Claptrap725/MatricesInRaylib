@@ -714,6 +714,17 @@ namespace MaticesInRaylib
 
             Set(this * m);
         }
+        public float GetRotateZ()
+        {
+            if (m2 > 0)
+            {
+                return (float)Math.Acos(m1);
+            }
+            else
+            {
+                return -(float)Math.Acos(m1);
+            }
+        }
 
 
         /// <summary>
@@ -780,17 +791,6 @@ namespace MaticesInRaylib
             //789
 
             Matrix3 M3 = new Matrix3(0, 0, 0, 0, 0, 0, 0, 0, 0);
-            //M3.m1 = M1.m1 * M2.m1 + M1.m2 * M2.m4 + M1.m3 * M2.m7;//Pos 1 = TL  L1 * R1 + L4 * R2 + L7 * R3  L147 * R123 ::: L123 * R147
-            //M3.m2 = M1.m1 * M2.m2 + M1.m2 * M2.m5 + M1.m3 * M2.m8;//pos 2 = TM  L2 * R1 + L5 * R2 + L8 * R3  L258 * R123 ::: L123 * R258
-            //M3.m3 = M1.m1 * M2.m3 + M1.m2 * M2.m6 + M1.m3 * M2.m9;
-
-            //M3.m4 = M1.m4 * M2.m1 + M1.m5 * M2.m4 + M1.m6 * M2.m7;
-            //M3.m5 = M1.m4 * M2.m2 + M1.m5 * M2.m5 + M1.m6 * M2.m8;
-            //M3.m6 = M1.m4 * M2.m3 + M1.m5 * M2.m6 + M1.m6 * M2.m9;
-
-            //M3.m7 = M1.m7 * M2.m1 + M1.m8 * M2.m4 + M1.m9 * M2.m7;
-            //M3.m8 = M1.m7 * M2.m2 + M1.m8 * M2.m5 + M1.m9 * M2.m8;
-            //M3.m9 = M1.m7 * M2.m3 + M1.m8 * M2.m6 + M1.m9 * M2.m9;
 
             M3.m1 = M1.m1 * M2.m1 + M1.m4 * M2.m2 + M1.m7 * M2.m3;
             M3.m2 = M1.m2 * M2.m1 + M1.m5 * M2.m2 + M1.m8 * M2.m3;
